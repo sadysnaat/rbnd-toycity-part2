@@ -103,13 +103,19 @@ def print_average_discount(price,average_price)
 end
 
 def print_toy_report(toy)
+	# Print the name of the toy
 	print_toy_title(toy["title"])
 	print_seperator(30)
+	# Print the retail price of the toy
 	print_toy_prize(toy["full-price"])
+	# Calculate and print the total number of purchases
 	print_toys_total_sales(toy["purchases"])
+	# Calculate and print the total amount of sales
 	print_toys_sales_amount(toy["purchases"])
+	# Calculate and print the average price the toy sold for
 	average_price = calculate_toys_sales_average(toy["purchases"])
 	print_average_sale_price(average_price)
+		# Calculate and print the average discount (% or $) based off the average sales price
 	print_average_discount(toy["full-price"],average_price)
 	print_seperator(30)
 	print_seperator(2,"\n")
@@ -124,6 +130,49 @@ def generate_brand_date(toy)
 	else
 		$brands_data[toy["brand"]] = {"no_of_products"=>toy["stock"],"prices"=>[toy["full-price"]],"purchases"=>[]}
 	end
+	toy["purchases"].each do |purchase|
+		$brands_data[toy["brand"]]["purchases"].push purchase["price"]
+	end
+end
+
+def print_brand_name(name)
+	puts name
+end
+
+def print_brands_total_stock(total_stock)
+	puts "Number of Products: #{total_stock}"
+end
+
+def calculate_brans_average_price(price_data)
+	return (price_data.inject(0.0) { |sum, price| sum + price.to_f } / price_data.size).round(2)
+end
+
+def print_brands_average_price(price_data)
+	average_price = calculate_brans_average_price(price_data)
+	puts "Average Price: $#{average_price}"
+end
+
+def calculate_brands_total_sale(purchase_data)
+	return purchase_data.inject(0.0) { |sum,purchase_amount| sum + purchase_amount }.round(2)
+end
+
+def print_brands_total_sale(purchase_data)
+	total_sales = calculate_brands_total_sale(purchase_data)
+	puts "Total Sales: $#{total_sales}"
+end
+
+def print_brand_report(brand,brands_data)
+	# Print the name of the brand
+	print_brand_name(brand)
+	print_seperator(30,"*")
+	# Count and print the number of the brand's toys we stock
+	print_brands_total_stock(brands_data["no_of_products"])
+	# Calculate and print the average price of the brand's toys
+	print_brands_average_price(brands_data["prices"])
+	# Calculate and print the total sales volume of all the brand's toys combined
+	print_brands_total_sale(brands_data["purchases"])
+	print_seperator(30)
+	print_seperator(2,"\n")
 end
 
 def start
@@ -134,23 +183,20 @@ def start
 	print_todays_date
 
 	print_product_banner
+
 	# For each product in the data set:
-		# Print the name of the toy
-		# Print the retail price of the toy
-		# Calculate and print the total number of purchases
-		# Calculate and print the total amount of sales
-		# Calculate and print the average price the toy sold for
-		# Calculate and print the average discount (% or $) based off the average sales price
 	$products_hash["items"].each do |toy|
 		print_toy_report(toy)
 		generate_brand_date(toy)
 	end
+
+
 	print_brands_banner
+	
 	# For each brand in the data set:
-		# Print the name of the brand
-		# Count and print the number of the brand's toys we stock
-		# Calculate and print the average price of the brand's toys
-		# Calculate and print the total sales volume of all the brand's toys combined
+	$brands_data.each do |brand,brands_data|
+		print_brand_report(brand,brands_data)
+	end
 end
 
 start
