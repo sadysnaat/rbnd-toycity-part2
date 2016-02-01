@@ -3,7 +3,7 @@ require 'json'
 
 def print_todays_date
 	time = Time.new()
-	puts time.strftime("%Y-%m-%d %H:%M:%S")
+	$report_file.puts time.strftime("%Y-%m-%d %H:%M:%S")
 end
 #Read from json file to variable and set report output file
 def setup_files
@@ -19,48 +19,50 @@ end
 
 def print_sales_report_banner
 	# Print "Sales Report" in ascii art
-	puts "  _____       _             _____                       _"
-	puts " / ____|     | |           |  __ \\                     | |"
-	puts "| (___   __ _| | ___  ___  | |__) |___ _ __   ___  _ __| |_"
-	puts " \\___ \\ / _` | |/ _ \\/ __| |  _  // _ \\ '_ \\ / _ \\| '__| __|"
-	puts " ____) | (_| | |  __/\\__ \\ | | \\ \\  __/ |_) | (_) | |  | |_"
-	puts "|_____/ \\__,_|_|\\___||___/ |_|  \\_\\___| .__/ \\___/|_|   \\__|"
-	puts "                                      | |"
-	puts "                                      |_|"
+	$report_file.puts "  _____       _             _____                       _"
+	$report_file.puts " / ____|     | |           |  __ \\                     | |"
+	$report_file.puts "| (___   __ _| | ___  ___  | |__) |___ _ __   ___  _ __| |_"
+	$report_file.puts " \\___ \\ / _` | |/ _ \\/ __| |  _  // _ \\ '_ \\ / _ \\| '__| __|"
+	$report_file.puts " ____) | (_| | |  __/\\__ \\ | | \\ \\  __/ |_) | (_) | |  | |_"
+	$report_file.puts "|_____/ \\__,_|_|\\___||___/ |_|  \\_\\___| .__/ \\___/|_|   \\__|"
+	$report_file.puts "                                      | |"
+	$report_file.puts "                                      |_|"
 end
 
 def print_product_banner
 	# Print "Products" in ascii art
-	puts "                     _            _       "
-	puts "                    | |          | |      "
-	puts " _ __  _ __ ___   __| |_   _  ___| |_ ___ "
-	puts "| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|"
-	puts "| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\"
-	puts "| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/"
-	puts "| |                                       "
-	puts "|_|                                       "
+	$report_file.puts "                     _            _       "
+	$report_file.puts "                    | |          | |      "
+	$report_file.puts " _ __  _ __ ___   __| |_   _  ___| |_ ___ "
+	$report_file.puts "| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|"
+	$report_file.puts "| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\"
+	$report_file.puts "| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/"
+	$report_file.puts "| |                                       "
+	$report_file.puts "|_|                                       "
 end
 
 def print_brands_banner
 	# Print "Brands" in ascii art
-	puts " _                         _     "
-	puts "| |                       | |    "
-	puts "| |__  _ __ __ _ _ __   __| |___ "
-	puts "| '_ \\| '__/ _` | '_ \\ / _` / __|"
-	puts "| |_) | | | (_| | | | | (_| \\__ \\"
-	puts "|_.__/|_|  \\__,_|_| |_|\\__,_|___/"
+	$report_file.puts " _                         _     "
+	$report_file.puts "| |                       | |    "
+	$report_file.puts "| |__  _ __ __ _ _ __   __| |___ "
+	$report_file.puts "| '_ \\| '__/ _` | '_ \\ / _` / __|"
+	$report_file.puts "| |_) | | | (_| | | | | (_| \\__ \\"
+	$report_file.puts "|_.__/|_|  \\__,_|_| |_|\\__,_|___/"
 end
 
-def print_seperator(number,character="*")
-	puts character * number
+def print_seperator(options={})
+	number = options.fetch(:number,1)
+	character = options.fetch(:character,"\n")
+	$report_file.puts character * number
 end
 
 def print_toy_title(title)
-	puts title
+	$report_file.puts title
 end
 
 def print_toy_prize(price)
-	puts "Retail Price: $#{price}"
+	$report_file.puts "Retail Price: $#{price}"
 end
 
 def calculate_toys_sales(purchases)
@@ -69,7 +71,7 @@ end
 
 def print_toys_total_sales(purchases)
 	total_sales = calculate_toys_sales(purchases)
-	puts "Total Purchaeses: #{total_sales}"
+	$report_file.puts "Total Purchaeses: #{total_sales}"
 end
 
 def calculate_toys_sales_amount(purchases)
@@ -80,7 +82,7 @@ end
 
 def print_toys_sales_amount(purchases)
 	total_sales_amount = calculate_toys_sales_amount(purchases)
-	puts "Total Sales: $#{total_sales_amount}"
+	$report_file.puts "Total Sales: $#{total_sales_amount}"
 end
 
 def calculate_toys_sales_average(purchases)
@@ -90,7 +92,7 @@ end
 
 def print_average_sale_price(average_price)
 	#average_price = calculate_toys_sales_average(purchases)
-	puts "Average Price: $#{average_price}"
+	$report_file.puts "Average Price: $#{average_price}"
 end
 
 def calculate_average_discount(price,average_price)
@@ -99,13 +101,13 @@ end
 
 def print_average_discount(price,average_price)
 	average_discount = calculate_average_discount(price,average_price)
-	puts "Average Discount: #{average_discount}%"
+	$report_file.puts "Average Discount: #{average_discount}%"
 end
 
 def print_toy_report(toy)
 	# Print the name of the toy
 	print_toy_title(toy["title"])
-	print_seperator(30)
+	print_seperator(number:30,character:"*")
 	# Print the retail price of the toy
 	print_toy_prize(toy["full-price"])
 	# Calculate and print the total number of purchases
@@ -117,8 +119,8 @@ def print_toy_report(toy)
 	print_average_sale_price(average_price)
 		# Calculate and print the average discount (% or $) based off the average sales price
 	print_average_discount(toy["full-price"],average_price)
-	print_seperator(30)
-	print_seperator(2,"\n")
+	print_seperator(number:30,character:"*")
+	print_seperator
 end
 
 def generate_brand_date(toy)
@@ -136,11 +138,11 @@ def generate_brand_date(toy)
 end
 
 def print_brand_name(name)
-	puts name
+	$report_file.puts name
 end
 
 def print_brands_total_stock(total_stock)
-	puts "Number of Products: #{total_stock}"
+	$report_file.puts "Number of Products: #{total_stock}"
 end
 
 def calculate_brans_average_price(price_data)
@@ -149,7 +151,7 @@ end
 
 def print_brands_average_price(price_data)
 	average_price = calculate_brans_average_price(price_data)
-	puts "Average Price: $#{average_price}"
+	$report_file.puts "Average Price: $#{average_price}"
 end
 
 def calculate_brands_total_sale(purchase_data)
@@ -158,21 +160,21 @@ end
 
 def print_brands_total_sale(purchase_data)
 	total_sales = calculate_brands_total_sale(purchase_data)
-	puts "Total Sales: $#{total_sales}"
+	$report_file.puts "Total Sales: $#{total_sales}"
 end
 
 def print_brand_report(brand,brands_data)
 	# Print the name of the brand
 	print_brand_name(brand)
-	print_seperator(30,"*")
+	print_seperator(number:30,character:"*")
 	# Count and print the number of the brand's toys we stock
 	print_brands_total_stock(brands_data["no_of_products"])
 	# Calculate and print the average price of the brand's toys
 	print_brands_average_price(brands_data["prices"])
 	# Calculate and print the total sales volume of all the brand's toys combined
 	print_brands_total_sale(brands_data["purchases"])
-	print_seperator(30)
-	print_seperator(2,"\n")
+	print_seperator(number:30,character:"*")
+	print_seperator
 end
 
 def start
@@ -192,7 +194,7 @@ def start
 
 
 	print_brands_banner
-	
+
 	# For each brand in the data set:
 	$brands_data.each do |brand,brands_data|
 		print_brand_report(brand,brands_data)
