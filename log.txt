@@ -1,0 +1,59 @@
+commit d886b670634ba370331f433d0b38ccf0c79cc3ea
+Author: Deepak Sharma <sadysnaat@gmail.com>
+Date:   Mon Feb 1 14:07:14 2016 +0530
+
+    Ready for Submission
+
+commit 2161eb3a26d52848ba8e0c41845f6110c852b251
+Author: Deepak Sharma <sadysnaat@gmail.com>
+Date:   Sun Jan 31 04:22:34 2016 +0530
+
+    Completed Brand Report Part
+
+commit c4840fd2d928ff23dbae5ba15963ca4e120d0b91
+Author: Deepak Sharma <sadysnaat@gmail.com>
+Date:   Sun Jan 31 02:11:40 2016 +0530
+
+    Completed Product Report Part
+
+commit efbd91143651026dbbe91420ac3a3b85ad888304
+Author: Deepak Sharma <sadysnaat@gmail.com>
+Date:   Sat Jan 30 22:45:27 2016 +0530
+
+    Finished setup_files
+
+commit bc27ade6905f0f3eb847e73b8f442cb457a0b1b6
+Author: Deepak Sharma <sadysnaat@gmail.com>
+Date:   Sat Jan 30 22:24:11 2016 +0530
+
+    add ascii art and todays date
+
+commit 5812b6b18cfb481ec3c6afb7ffb02706b5a64d94
+Author: Julia Van Cleve <julia@jmv.me>
+Date:   Thu Jan 7 15:38:24 2016 -0800
+
+    Average discount can be $ or %
+
+commit 35474a11c114777259507f876494941d210bee8b
+Author: Julia Van Cleve <julia@jmv.me>
+Date:   Thu Jan 7 13:14:40 2016 -0800
+
+    Remove old report and fix spacing issues
+
+commit bb054ef328facd9ded2d734753e2f28c3005b3d0
+Author: Julia Van Cleve <julia@jmv.me>
+Date:   Thu Jan 7 11:42:16 2016 -0800
+
+    Clarify % or $ for average discount
+
+commit 32798d5558dba40d1a1497b0be66997b02a1bb82
+Author: Walter Latimer <walter@walterlatimer.com>
+Date:   Tue Dec 15 12:52:25 2015 -0800
+
+    Add README
+
+commit 3d665b4778196fc1e6d08f9e4cd94b46cbf3dc8a
+Author: Walter Latimer <walter@walterlatimer.com>
+Date:   Tue Dec 15 12:50:29 2015 -0800
+
+    Initial Commit
